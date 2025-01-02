@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectIsAuthenticated } from './store/slices/authSlice';
 import Layout from './components/layout/Layout';
@@ -26,39 +26,41 @@ const PublicRoute = ({ children }) => {
 
 const App = () => {
   return (
-    <Routes>
-      {/* Public Routes */}
-      <Route path="/login" element={
-        <PublicRoute>
-          <Login />
-        </PublicRoute>
-      } />
-      <Route path="/register" element={
-        <PublicRoute>
-          <Register />
-        </PublicRoute>
-      } />
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } />
+        <Route path="/register" element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        } />
 
-      {/* Protected Routes */}
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            <Layout />
-          </PrivateRoute>
-        }
-      >
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="settings" element={<Settings />} />
-        <Route path="templates/my" element={<MyTemplates />} />
-        <Route path="templates/public" element={<PublicTemplates />} />
-        <Route path="templates/create" element={<CreateTemplate />} />
-        <Route path="templates/edit/:id" element={<EditTemplate />} />
-        <Route path="templates/use/:id" element={<UseTemplate />} />
-        <Route path="templates/responses/:id" element={<ViewResponses />} />
-      </Route>
-    </Routes>
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Layout />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="templates/my" element={<MyTemplates />} />
+          <Route path="templates/public" element={<PublicTemplates />} />
+          <Route path="templates/create" element={<CreateTemplate />} />
+          <Route path="templates/edit/:id" element={<EditTemplate />} />
+          <Route path="templates/use/:id" element={<UseTemplate />} />
+          <Route path="templates/responses/:id" element={<ViewResponses />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 };
 

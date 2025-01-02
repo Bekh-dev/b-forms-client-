@@ -9,6 +9,7 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
+    assetsDir: 'assets',
     terserOptions: {
       compress: {
         drop_console: true,
@@ -21,8 +22,11 @@ export default defineConfig({
           vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['@heroicons/react'],
           state: ['@reduxjs/toolkit', 'react-redux']
-        }
-      }
+        },
+        assetFileNames: 'assets/[name].[ext]',
+        chunkFileNames: 'assets/[name].js',
+        entryFileNames: 'assets/[name].js',
+      },
     }
   },
   server: {
